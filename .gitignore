@@ -1,0 +1,11 @@
+.DS_Store
+*.o
+*.swp
+*.lo
+*.bundle
+*.dylib
+.libs
+*.la
+*.a
+autom4te.cache
+config.status*

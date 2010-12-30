@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libofa", "libofa.vcproj", "{2A35DFF7-5D0A-4626-B6BC-7CEA86215953}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example", "example.vcproj", "{11176452-DB3A-4731-B85D-3F749A4D6B72}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+		{11176452-DB3A-4731-B85D-3F749A4D6B72}.0 = {2A35DFF7-5D0A-4626-B6BC-7CEA86215953}
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{2A35DFF7-5D0A-4626-B6BC-7CEA86215953}.Debug.ActiveCfg = Debug|Win32
+		{2A35DFF7-5D0A-4626-B6BC-7CEA86215953}.Debug.Build.0 = Debug|Win32
+		{2A35DFF7-5D0A-4626-B6BC-7CEA86215953}.Release.ActiveCfg = Release|Win32
+		{2A35DFF7-5D0A-4626-B6BC-7CEA86215953}.Release.Build.0 = Release|Win32
+		{11176452-DB3A-4731-B85D-3F749A4D6B72}.Debug.ActiveCfg = Debug|Win32
+		{11176452-DB3A-4731-B85D-3F749A4D6B72}.Debug.Build.0 = Debug|Win32
+		{11176452-DB3A-4731-B85D-3F749A4D6B72}.Release.ActiveCfg = Release|Win32
+		{11176452-DB3A-4731-B85D-3F749A4D6B72}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

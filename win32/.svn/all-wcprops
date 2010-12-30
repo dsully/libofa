@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/!svn/ver/246/libofa/trunk/win32
+END
+libofa.sln
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/226/libofa/trunk/win32/libofa.sln
+END
+libofa.def
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/246/libofa/trunk/win32/libofa.def
+END
+example.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/226/libofa/trunk/win32/example.vcproj
+END
+libofa.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/226/libofa/trunk/win32/libofa.vcproj
+END

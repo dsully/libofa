@@ -70,7 +70,7 @@ extern "C"
 const char *ofa_create_print(unsigned char *data, int byteOrder, long size, int sRate, int stereo)
 {
     short *samples = (short *) data;
-#ifdef BIG_ENDIAN
+#if (BIG_ENDIAN) or (WORDS_BIG_ENDIAN)
     if (byteOrder == OFA_LITTLE_ENDIAN) {
 	for (int i = 0; i < size; ++i) {
 	    samples[i] = data[2*i+1] << 8 | data[2*i];

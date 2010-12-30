@@ -2,7 +2,7 @@
 
    libofa -- the Open Fingerprint Architecture library
 
-   Copyright (C) 2006 MusicIP Corporation
+   Copyright (C) 2006-2007 MusicIP Corporation
    All rights reserved.
 
 -------------------------------------------------------------------*/
@@ -14,11 +14,12 @@
 #include "../config.h"
 #include "fftlib_op.h"
 
+#define ROUND(x) ((x > 0 ) ? (long) floor(x+0.5) : (long) ceil(x-0.5))
 
 void 
 FFTLib_op::Initialize(int N, bool optimize)
 {
-        Exp = (int) log2(N);
+        Exp = ROUND(log2(N));
 	if (Init)
 	{
 		delete[] A.realp;

@@ -12,6 +12,7 @@
 // DATE CREATED: 1/12/06
 
 
+#include <stdlib.h>
 #include <math.h>
 #include "signal_op.h"
 #include "AFLIB/aflibConverter.h"

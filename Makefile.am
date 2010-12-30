@@ -8,7 +8,7 @@
 #-------------------------------------------------------------------
 AUTOMAKE_OPTIONS = foreign
 
-SUBDIRS = include lib examples
+SUBDIRS = include lib @EXAMPLES_SUBDIR@
 DIST_SUBDIRS = include lib examples
 
 cvsclean: distclean
@@ -19,7 +19,9 @@ cvsclean: distclean
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libofa.pc
 
-#  README.win32 config_win32.h 
-EXTRA_DIST = libofa.pc.in README COPYING
+EXTRA_DIST = autogen.sh config_win32.h connected_by_musicip.gif \
+	connected_by_musicip.png COPYING Doxyfile.in libofa.pc.in README \
+	README.win32 win32/example.vcproj win32/libofa.def win32/libofa.sln
+	win32/libofa.vcproj
 
 CLEANFILES = stamp-h

@@ -2,14 +2,13 @@
 
    libofa -- the Open Fingerprint Architecture library
 
-   Public Domain (PD) 2006 MusicIP Corporation
+   Public Domain (PD) 2006-2007 MusicIP Corporation
    No rights reserved.
 
 -------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include <cstring>
 #include <map>
 #include <expat.h>
 #include <curl/curl.h>
@@ -46,7 +45,7 @@ const char *request_format =
 const char *request_format2 =
     "cid=%s&"       // Client ID
     "cvr=%s&"       // Client Version
-    "pid=%s&"       // PUID 
+    "uid=%s&"       // PUID 
     "rmd=%d&"       // m = 1: return metadata; m = 0: only return id 
     "brt=%d&"       // bitrate (kbps)
     "fmt=%s&"       // File extension (e.g. mp3, ogg, flac)
@@ -259,7 +258,7 @@ bool retrieve_metadata(string client_key, string client_version,
     }
     // printf("response: %s\n\n", response.c_str());
 
-    unsigned int q = response.find("<?xml");
+    string::size_type q = response.find("<?xml");
     if (q != string::npos) {
         response = response.substr(q);
     }

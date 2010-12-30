@@ -38,7 +38,7 @@ endif
 #  6. If any interfaces have been removed since the last public release, then 
 #     set age to 0. 
 libofa_la_LDFLAGS = -version-info 0:2:0 -no-undefined 
-libofa_la_LIBADD = AFLIB/libaflib.la -lm 
+libofa_la_LIBADD = AFLIB/libaflib.la -lm @FFT_LIBS@  
 
 noinst_HEADERS = error_op.h fftlib_op.h fft_op.h frametracker_op.h signal_op.h \
                  trackdata_op.h trackframe_op.h tracklist_op.h

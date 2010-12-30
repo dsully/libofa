@@ -44,7 +44,11 @@ AudioData* loadWaveFile(char *file) {
     int srate = 0;
     int channels = 0;
 
-    int fd = open(file, O_RDONLY | 0x8000);
+#ifdef WIN32
+    int fd = open(file, O_RDONLY | 0x8000); // Why not O_BINARY?
+#else
+    int fd = open(file, O_RDONLY);
+#endif
     if (fd == -1)
 	return 0;
 

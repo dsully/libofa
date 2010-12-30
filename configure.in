@@ -46,29 +46,41 @@ if test "$GXX" = yes; then
   CXXFLAGS="$CXXFLAGS -Wall -g"
 fi
 
+AC_ARG_ENABLE([examples], AS_HELP_STRING([--disable-examples], [Don't build the examples (default: enabled)]))
+
 dnl Checks for libraries.
 
-dnl libexpat check
-AC_CHECK_LIB(expat, XML_ExpatVersion,
-	[EXPAT_LIBS="-lexpat"], [
-	echo "*"
-	echo "*  expat is needed to build this library. It is either not"
-	echo "*  installed on your system or it is too old."
-	echo "*  Please download it from http://expat.sourceforge.net."
-	echo "*"
-	AC_MSG_ERROR("Cannot build. Stop.")], -lexpat)
-AC_SUBST(EXPAT_LIBS)
+EXAMPLES_SUBDIR=""
 
-dnl libcurl check
-AC_CHECK_LIB(curl, curl_global_init,
-	[CURL_LIBS="-lcurl"], [
-	echo "*"
-	echo "*  libcurl is needed to build this library. It is either not"
-	echo "*  installed on your system or it is too old."
-	echo "*  Please download it http://curl.haxx.se/"
-	echo "*"
-	AC_MSG_ERROR("Cannot build. Stop.")], -lcurl)
-AC_SUBST(CURL_LIBS)
+if test "x$enable_examples" != "xno" ; then
+
+    dnl libexpat check
+    AC_CHECK_LIB(expat, XML_ExpatVersion,
+    	    [EXPAT_LIBS="-lexpat"], [
+	    echo "*"
+	    echo "*  expat is needed to build this library. It is either not"
+	    echo "*  installed on your system or it is too old."
+	    echo "*  Please download it from http://expat.sourceforge.net."
+	    echo "*"
+	    AC_MSG_ERROR("Cannot build. Stop.")], -lexpat)
+    AC_SUBST(EXPAT_LIBS)
+
+    dnl libcurl check
+    AC_CHECK_LIB(curl, curl_global_init,
+        [CURL_LIBS="-lcurl"], [
+        echo "*"
+        echo "*  libcurl is needed to build this library. It is either not"
+        echo "*  installed on your system or it is too old."
+        echo "*  Please download it http://curl.haxx.se/"
+        echo "*"
+        AC_MSG_ERROR("Cannot build. Stop.")], -lcurl)
+    AC_SUBST(CURL_LIBS)
+
+    EXAMPLES_SUBDIR="examples"
+
+fi
+
+AC_SUBST(EXAMPLES_SUBDIR)
 
 dnl Support libfftw2 and vSDP and MKL (intel)
 dnl  FFTW for FFTW v2. FFTW3 for FFTW v3. VDSP for vDSP. MKL for MKL
@@ -76,7 +88,7 @@ dnl TODO: PREANSI for win32
 
 if test x$os = xdarwin; then
     AC_MSG_NOTICE([Using vDSP on OS X])
-    LIBS="$LIBS -framework Accelerate"
+    FFT_LIBS="$LIBS -framework Accelerate"
     FFT_WRAPPER="fftlibvdsp_op.cpp"
     AM_CONDITIONAL(FFTW3, false)
     AM_CONDITIONAL(VDSP, true)
@@ -85,18 +97,19 @@ else
     AC_MSG_NOTICE([Using libfftw3])
     AC_CHECK_LIB(fftw3, fftw_malloc,
             [
-             LIBS="$LIBS -lfftw3"
+             FFT_LIBS="-lfftw3"
              FFT_WRAPPER="fftlibw3_op.cpp"
              AM_CONDITIONAL(FFTW3, true)
              AM_CONDITIONAL(VDSP, false)
              AC_DEFINE_UNQUOTED(FFTW3, 1, Use libfftw3)
             ], [
             echo "*"
-            echo "*  libfft3 is needed to build this library."
+            echo "*  libfftw3 is needed to build this library."
             echo "*"
             AC_MSG_ERROR("Cannot build. Stop.")])
 fi
 
+AC_SUBST(FFT_LIBS)
 AC_SUBST(FFT_WRAPPER)
 
 dnl Checks for header files.
@@ -111,5 +124,6 @@ lib/Makefile
 lib/JAMA/Makefile 
 lib/AFLIB/Makefile 
 examples/Makefile 
-libofa.pc], 
+libofa.pc
+Doxyfile], 
 echo timestamp > stamp-h)

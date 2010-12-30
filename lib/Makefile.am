@@ -37,7 +37,7 @@ endif
 #     increment age.
 #  6. If any interfaces have been removed since the last public release, then 
 #     set age to 0. 
-libofa_la_LDFLAGS = -version-info 0:0:0 -no-undefined 
+libofa_la_LDFLAGS = -version-info 0:2:0 -no-undefined 
 libofa_la_LIBADD = AFLIB/libaflib.la -lm 
 
 noinst_HEADERS = error_op.h fftlib_op.h fft_op.h frametracker_op.h signal_op.h \

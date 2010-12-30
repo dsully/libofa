@@ -16,8 +16,8 @@ cvsclean: distclean
 	rm -f *~ *.exe
 	rm -f $(PACKAGE)-$(VERSION).tar.gz
 
-pcdir = $(libdir)/pkgconfig
-pc_DATA = libofa.pc
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libofa.pc
 
 #  README.win32 config_win32.h 
 EXTRA_DIST = libofa.pc.in README COPYING

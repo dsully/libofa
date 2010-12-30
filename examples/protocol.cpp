@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <cstring>
 #include <map>
 #include <expat.h>
 #include <curl/curl.h>

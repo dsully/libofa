@@ -11,7 +11,7 @@
 // AUTHOR: Frode Holm
 // DATE CREATED: 1/12/06
 
-
+#include <cstdlib>
 #include <stdlib.h>
 #include <math.h>
 #include "signal_op.h"

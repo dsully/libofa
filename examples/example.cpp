@@ -7,6 +7,8 @@
 
 -------------------------------------------------------------------*/
 
+#include <ctype.h>
+#include <cstring>
 #include "protocol.h"
 
 AudioData* loadWaveFile(char *file);

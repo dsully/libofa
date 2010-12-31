@@ -24,7 +24,7 @@ AudioData *loadWaveFile(char *file);
 //
 AudioData* loadDataUsingLAME(char *file) {
     char *temp = "fpTemp.wav";
-	
+
 #ifdef WIN32
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -34,7 +34,7 @@ AudioData* loadDataUsingLAME(char *file) {
     ZeroMemory(&pi, sizeof(pi));
 
     char * cmd = new char[1024];
-    sprintf(cmd,"lame --decode \"%s\" fpTemp.wav", file);	
+    sprintf(cmd,"lame --decode \"%s\" fpTemp.wav", file);
     if (!CreateProcess(NULL, // No module name (use command line).
 		cmd,     // Command line.
 		NULL,             // Process handle not inheritable.

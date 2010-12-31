@@ -34,7 +34,7 @@ void ofa_get_version(int *major, int *minor, int *rev);
  * This is the simplest interface required to generate fingerprints.
  * examples/protocol.h defines some higher level classes which can be connected
  * to codecs in various formats for a higher level API
- * 
+ *
  * @param data a buffer of 16-bit samples in interleaved format (if stereo),
  *  i.e. L,R,L,R, etc. This buffer is destroyed during processing. Ideally,
  *  this buffer should contain the entire song to be analyzed, but the process
@@ -56,9 +56,9 @@ void ofa_get_version(int *major, int *minor, int *rev);
  *  ofa_create_print.
  *
  * @note NOTE THAT THE PASSED IN DATA MAY BE BYTE SWAPPED DURING THE METHOD.
- * ASSUME THAT DATA IN THE INPUT BUFFER IS DESTROYED AS A SIDE-EFFECT OF 
+ * ASSUME THAT DATA IN THE INPUT BUFFER IS DESTROYED AS A SIDE-EFFECT OF
  * CALLING THIS FUNCTION
- */ 
+ */
 const char *ofa_create_print(unsigned char* samples, int byteOrder, long size, int sRate, int stereo);
 
 #ifdef __cplusplus

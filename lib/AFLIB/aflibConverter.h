@@ -49,9 +49,9 @@
 
  This class will perform audio resampling. With the constructor you can choose the
  type of resampling to be done. Simple linear interpolation can be done by setting
- linear_interpolation to be TRUE in the constructor. The other two flags are 
+ linear_interpolation to be TRUE in the constructor. The other two flags are
  ignored if this is set. If linear_interpolation is FALSE then some form of filtering
- will be done. IF high_quality is FALSE then a small filter will be performed. 
+ will be done. IF high_quality is FALSE then a small filter will be performed.
  If high_quality is TRUE then a large filter (higher quality) will be performed. For
  both the small and large filters another parameter can be specified, filter_interpolation.
  With filter_interpolation set then the filter coefficients used for both the small and
@@ -97,11 +97,11 @@ public:
    int
    resample(           /* number of output samples returned */
       int& inCount,    /* number of input samples to convert */
-    	int outCount,    /* number of output samples to compute */
+      int outCount,    /* number of output samples to compute */
       short inArray[], /* input array data (length inCount * nChans) */
       short outArray[]);/* output array data (length outCount * nChans) */
- 
- 
+
+
 private:
 
    aflibConverter();
@@ -207,7 +207,7 @@ private:
       int outCount,    /* number of output samples to compute */
       short inArray[], /* input array data (length inCount * nChans) */
       short outArray[]);/* output array data (length outCount * nChans) */
- 
+
    int
    resampleWithFilter(  /* number of output samples returned */
       int& inCount,      /* number of input samples to convert */

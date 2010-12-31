@@ -79,8 +79,7 @@ public:
 	delete[] samples;
     }
     // size is number of samples (half the number of bytes)
-    void setData(unsigned char*_samples, int _byteOrder, long _size,
-	   	 int _sRate, bool _stereo, int _ms, string _fmt) {
+    void setData(unsigned char*_samples, int _byteOrder, long _size, int _sRate, bool _stereo, int _ms, string _fmt) {
 	samples = _samples;
 	byteOrder = _byteOrder;
 	size = _size;
@@ -102,7 +101,7 @@ public:
 	return true;
     }
     // Get your unique key at http://www.musicdns.org
-    TrackInformation *getMetadata(string client_key, string client_version, 
+    TrackInformation *getMetadata(string client_key, string client_version,
 	    bool metadataFlag)
     {
 	if (!retrieve_metadata(client_key, client_version, &info, metadataFlag))

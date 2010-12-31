@@ -18,7 +18,7 @@
 // Constructor
 
 TrackFrame_op::TrackFrame_op(float aTime)
-{ 
+{
 	FrameTime = aTime;
 	NumTracks = 0;
 	BaseTr = 0;
@@ -28,7 +28,7 @@ TrackFrame_op::TrackFrame_op(float aTime)
 // Delete the list of peaks on delete
 
 TrackFrame_op::~TrackFrame_op()
-{ 
+{
 	TrackData_op* trk = BaseTr;
 	while (trk != 0) {
 		TrackData_op* next = trk->getHigher();
@@ -39,7 +39,7 @@ TrackFrame_op::~TrackFrame_op()
 
 // Element add/remove
 
-void 
+void
 TrackFrame_op::Add(TrackData_op* td)
 {
 	if (NumTracks == 0)
@@ -49,7 +49,7 @@ TrackFrame_op::Add(TrackData_op* td)
 
 // Answer the best-match (in frequency) track to the given value
 
-TrackData_op* 
+TrackData_op*
 TrackFrame_op::getTrackNearestFreq(float freq)
 {
 

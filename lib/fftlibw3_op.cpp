@@ -19,7 +19,7 @@
 #include "fftlib_op.h"
 
 
-void 
+void
 FFTLib_op::Initialize(int N, bool optimize)
 {
 	if (optimize)
@@ -52,9 +52,8 @@ FFTLib_op::SetSize(int N, bool optimize, double *in, double *out)
 	PlanF = fftw_plan_r2r_1d(N, in, out, FFTW_R2HC, Flags);
 }
 
-void 
+void
 FFTLib_op::ComputeFrame(int N, double *in, double *out)
 {
 	fftw_execute(PlanF);
 }
-

@@ -29,37 +29,37 @@ FrameTracker_op::FrameTracker_op(float peakT, float fThresh, float lenT, int max
 
 // Destructor
 
-FrameTracker_op::~FrameTracker_op() 
-{ 
+FrameTracker_op::~FrameTracker_op()
+{
 	BaseFr = 0;
 }
 
 
-void 
-FrameTracker_op::Compute(FFT_op& spectra) 
+void
+FrameTracker_op::Compute(FFT_op& spectra)
 {
 	double sdur = spectra.GetStepDur();
 
 	int numFrames = spectra.GetNumFrames();
 
 	// Detect the peaks in each frame
-	for (int i = 0; i < numFrames; i++) 
-	{		
+	for (int i = 0; i < numFrames; i++)
+	{
 		float realTime = (float)(i * sdur);
 		TrackFrame_op* thePeaks = new TrackFrame_op(realTime);
 
 		FindPeaks(spectra, i, thePeaks);
 		Tracks.Add(thePeaks);				// add the frame to the track list
 	}
-					
+
 	TrackPeaks();							// Track the peaks between frames
 	ContinuePeaks();						// Try to extend the tracks
 }
 
 // Find the peaks in a single frame;
 // use local-max detection over the min threshold
-void 
-FrameTracker_op::FindPeaks(FFT_op& data, int frameNum, TrackFrame_op* thePeaks) 
+void
+FrameTracker_op::FindPeaks(FFT_op& data, int frameNum, TrackFrame_op* thePeaks)
 {
 
 	int numBins = data.GetNumBins();
@@ -71,7 +71,7 @@ FrameTracker_op::FindPeaks(FFT_op& data, int frameNum, TrackFrame_op* thePeaks)
 	float prevV = * frame++;			// previous sample
 	float thisV = * frame++;			// this sample
 	float nextV = * frame++;			// next sample
-	for (int i = 4; i < (numBins - 2); i++) 
+	for (int i = 4; i < (numBins - 2); i++)
 	{
 		float nextNV = * frame++;		// next next sample
 
@@ -81,7 +81,7 @@ FrameTracker_op::FindPeaks(FFT_op& data, int frameNum, TrackFrame_op* thePeaks)
 		if (found && (PeakWidth > 1))	// if using wide peaks, compare prevPV and nextNV
 			found = found && (thisV > prevPV) && (thisV > nextNV);
 
-		if (found) 
+		if (found)
 		{
 									// If peak detected, do cubic interpolation for index, 									// freq, and magnitude -- first calculate "real" index
 			double realIndex = ((prevV - nextV) * 0.5) / (prevV - (2.0 * thisV) + nextV);
@@ -104,8 +104,8 @@ FrameTracker_op::FindPeaks(FFT_op& data, int frameNum, TrackFrame_op* thePeaks)
 }
 
 // Answer the best match for the given frequency in the given frame
-TrackData_op* 
-FrameTracker_op::GetBestMatch(float pitch, TrackFrame_op* frame) 
+TrackData_op*
+FrameTracker_op::GetBestMatch(float pitch, TrackFrame_op* frame)
 {
 	TrackData_op* match =  frame->getTrackNearestFreq(pitch);
 	if (match != 0) {				// If it's within the freq. range FreqThreshold
@@ -119,8 +119,8 @@ FrameTracker_op::GetBestMatch(float pitch, TrackFrame_op* frame)
 // Track and group peaks in the given data set;
 // do a running forward/backward comparison of all peaks in a track
 
-void 
-FrameTracker_op::TrackPeaks() 
+void
+FrameTracker_op::TrackPeaks()
 {
 
 	TrackFrame_op* prevFr = Tracks.getBaseFrame();
@@ -135,7 +135,7 @@ FrameTracker_op::TrackPeaks()
 			TrackData_op* match =  GetBestMatch(baseP, thisFr);
 			if (match != 0) {
 				baseTr->linkTo(match);					// create double links
-			} 
+			}
 			baseTr = baseTr->getHigher();
 		}								 // end of current frame
 		prevFr = thisFr;
@@ -148,8 +148,8 @@ FrameTracker_op::TrackPeaks()
 
 // Continue track groups, and gather track statistics
 
-void 
-FrameTracker_op::ContinuePeaks() 
+void
+FrameTracker_op::ContinuePeaks()
 {
 
 	TrackFrame_op* base = Tracks.getBaseFrame();

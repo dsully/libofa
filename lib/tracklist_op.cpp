@@ -17,16 +17,16 @@
 
 // Constructor
 
-TrackList_op::TrackList_op() 
-{ 
-	NumFrames = 0; 
+TrackList_op::TrackList_op()
+{
+	NumFrames = 0;
 	BaseFr = 0;
 	LastFr = 0;
 }
 
 // Delete the list of frames on delete
 
-TrackList_op::~TrackList_op() 
+TrackList_op::~TrackList_op()
 {
 	TrackFrame_op* frm = BaseFr;
 	while (frm != 0) {
@@ -38,8 +38,8 @@ TrackList_op::~TrackList_op()
 
 // Element add/remove
 
-void 
-TrackList_op::Add(TrackFrame_op* td) 
+void
+TrackList_op::Add(TrackFrame_op* td)
 {
 	if (NumFrames == 0) {
 		BaseFr = td;

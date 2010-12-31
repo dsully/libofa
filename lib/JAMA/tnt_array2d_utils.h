@@ -78,14 +78,14 @@ std::istream& operator>>(std::istream &s, Array2D<T> &A)
 /**
 	Matrix Multiply:  compute C = A*B, where C[i][j]
 	is the dot-product of row i of A and column j of B.
-	
+
 
 	@param A an (m x n) array
 	@param B an (n x k) array
 	@return the (m x k) array A*B, or a null array (0x0)
-		if the matrices are non-conformant (i.e. the number 
+		if the matrices are non-conformant (i.e. the number
 		of columns of A are different than the number of rows of B.)
-	
+
 
 */
 template <class T>

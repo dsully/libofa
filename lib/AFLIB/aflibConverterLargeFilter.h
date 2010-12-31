@@ -17,9 +17,9 @@
  *
  *   Julius O. Smith  jos@ccrma.stanford.edu
  *
- */                                                                                      
+ */
 
-/* 
+/*
 
 The default filter requires an
 oversampling factor of around 20% to avoid aliasing.  The expensive

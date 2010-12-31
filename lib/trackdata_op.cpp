@@ -21,7 +21,7 @@
 
 TrackData_op::TrackData_op() { /* empty */ }
 
-TrackData_op::TrackData_op(float aTime, float frequency, float amplitude, float frDur) 
+TrackData_op::TrackData_op(float aTime, float frequency, float amplitude, float frDur)
 {
 	StartTime = aTime;
 	EndTime = 0.0f;
@@ -34,13 +34,13 @@ TrackData_op::TrackData_op(float aTime, float frequency, float amplitude, float 
 	InTrack = false;
 }
 
-TrackData_op::~TrackData_op() 
+TrackData_op::~TrackData_op()
 {
 	previous = next = higher = 0;
 }
 
-float 
-TrackData_op::getDuration() 
+float
+TrackData_op::getDuration()
 {
 	if (isOrphan())
 		return FrameDur;
@@ -48,7 +48,7 @@ TrackData_op::getDuration()
 		return (StartTime);
 	if (EndTime == 0.0f) {
 		TrackData_op* trk = getTail();
-		EndTime = trk->getTime() + FrameDur; 
+		EndTime = trk->getTime() + FrameDur;
 	}
 	return (EndTime - StartTime);
 }
@@ -56,8 +56,8 @@ TrackData_op::getDuration()
 
 // Extend the receiver by the argument
 
-void 
-TrackData_op::linkTo(TrackData_op* tp) 
+void
+TrackData_op::linkTo(TrackData_op* tp)
 {
 	tp->linkPrevious(this);
 	linkNext(tp);
@@ -68,8 +68,8 @@ TrackData_op::linkTo(TrackData_op* tp)
 
 // Walk the links back to the head of this track
 
-TrackData_op* 
-TrackData_op::getHead() 
+TrackData_op*
+TrackData_op::getHead()
 {
 	TrackData_op* trk;
 	trk = this;
@@ -81,8 +81,8 @@ TrackData_op::getHead()
 
 // Walk the links forward to the tail of this track
 
-TrackData_op* 
-TrackData_op::getTail() 
+TrackData_op*
+TrackData_op::getTail()
 {
 	TrackData_op* trk;
 	trk = this;

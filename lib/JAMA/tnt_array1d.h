@@ -34,9 +34,9 @@ namespace TNT
 
 /**
 	Tempplated one-dimensional, numerical array which
-	looks like a conventional C array. 
-	Elements are accessed via the familiar A[i] notation. 
-	
+	looks like a conventional C array.
+	Elements are accessed via the familiar A[i] notation.
+
 	<p>
 	Array assignment is by reference (i.e. shallow assignment).
 	That is, B=A implies that the A and B point to the
@@ -61,12 +61,12 @@ namespace TNT
 	to it, it is destoryed.
 */
 template <class T>
-class Array1D 
+class Array1D
 {
 
 
   private:
-    T* v_;                  
+    T* v_;
     int n_;
     int *ref_count_;
 
@@ -93,7 +93,7 @@ class Array1D
 		     Array1D & inject(const Array1D & A);
 	inline   T& operator[](int i);
 	inline   const T& operator[](int i) const;
-	inline 	 int dim1() const;
+	inline	 int dim1() const;
 	inline   int dim() const;
 	inline   int ref_count() const;
                ~Array1D();
@@ -107,7 +107,7 @@ class Array1D
 */
 
 template <class T>
-Array1D<T>::Array1D() : v_(0), n_(0), ref_count_(0) 
+Array1D<T>::Array1D() : v_(0), n_(0), ref_count_(0)
 {
 	ref_count_ = new int;
 	*ref_count_ = 1;
@@ -120,7 +120,7 @@ Array1D<T>::Array1D() : v_(0), n_(0), ref_count_(0)
 	Array1D B(A.copy()), or B = A.copy(), instead.
 */
 template <class T>
-Array1D<T>::Array1D(const Array1D<T> &A) : v_(A.v_),  
+Array1D<T>::Array1D(const Array1D<T> &A) : v_(A.v_),
 	n_(A.n_), ref_count_(A.ref_count_)
 {
 	(*ref_count_)++;
@@ -129,7 +129,7 @@ Array1D<T>::Array1D(const Array1D<T> &A) : v_(A.v_),
 
 
 /**
-	Create a new array (vector) of length <b>n</b>,  
+	Create a new array (vector) of length <b>n</b>,
 	WIHOUT initializing array elements.
 	To create an initialized array of constants, see Array1D(n,value).
 
@@ -154,7 +154,7 @@ Array1D<T>::Array1D(int n) : v_(0), n_(n), ref_count_(0)
 	constant specified by argument.  Most often used to
 	create an array of zeros, as in A(n, 0.0).
 
-	@param n the dimension (length) of the new matrix.  
+	@param n the dimension (length) of the new matrix.
 	@param val the constant value to set all elements of the new array to.
 */
 template <class T>
@@ -175,7 +175,7 @@ Array1D<T>::Array1D(int n, const T &val) : v_(0), n_(n) ,
 
 	@param n the dimension (length) of the new matrix.
 	@param a the one dimensional C array to use as data storage for
-		the array. 
+		the array.
 */
 template <class T>
 Array1D<T>::Array1D(int n, T *a) : v_(a), n_(n) ,
@@ -192,13 +192,13 @@ Array1D<T>::Array1D(int n, T *a) : v_(a), n_(n) ,
 	checked that it falls within the array bounds.
 */
 template <class T>
-inline T& Array1D<T>::operator[](int i) 
-{ 
+inline T& Array1D<T>::operator[](int i)
+{
 #ifdef TNT_BOUNDS_CHECK
 	assert(i>= 0);
 	assert(i < n_);
 #endif
-	return v_[i]; 
+	return v_[i];
 }
 
 /**
@@ -207,13 +207,13 @@ inline T& Array1D<T>::operator[](int i)
 	checked that it fall within the array bounds.
 */
 template <class T>
-inline const T& Array1D<T>::operator[](int i) const 
-{ 
+inline const T& Array1D<T>::operator[](int i) const
+{
 #ifdef TNT_BOUNDS_CHECK
 	assert(i>= 0);
 	assert(i < n_);
 #endif
-	return v_[i]; 
+	return v_[i];
 }
 
 /**
@@ -227,7 +227,7 @@ Array1D<T> & Array1D<T>::operator=(const T &a)
 }
 /**
 	Create a new of existing matrix.  Used in B = A.copy()
-	or in the construction of B, e.g. Array1D B(A.copy()), 
+	or in the construction of B, e.g. Array1D B(A.copy()),
 	to create a new array that does not share data.
 
 */
@@ -248,11 +248,11 @@ Array1D<T> Array1D<T>::copy() const
 
 	This differs from B = A.copy() in that references to B
 	before this assignment are also affected.  That is, if
-	we have 
+	we have
 	<pre>
 	Array1D A(n);
 	Array1D C(n);
-	Array1D B(C);        // elements of B and C are shared. 
+	Array1D B(C);        // elements of B and C are shared.
 
 </pre>
 	then B.inject(A) affects both and C, while B=A.copy() creates
@@ -260,7 +260,7 @@ Array1D<T> Array1D<T>::copy() const
 
 	@param A the array from which elements will be copied
 	@return an instance of the modifed array. That is, in B.inject(A),
-	it returns B.  If A and B are not conformat, no modifications to 
+	it returns B.  If A and B are not conformat, no modifications to
 	B are made.
 
 */
@@ -303,7 +303,7 @@ Array1D<T> & Array1D<T>::ref(const Array1D<T> &A)
 		ref_count_ = A.ref_count_;
 
 		(*ref_count_) ++ ;
-		
+
 	}
 	return *this;
 }

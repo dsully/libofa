@@ -39,7 +39,7 @@ public:
 
 	void Compute(FFT_op& spectra);
 
-private:	
+private:
 	TrackList_op Tracks;		// list of tracked frames
 	float PeakThreshold;	// min peak magnitude for detection
 	float FreqThreshold;	// max step between peaks for tracking

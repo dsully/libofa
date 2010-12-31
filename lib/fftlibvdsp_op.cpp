@@ -16,7 +16,7 @@
 
 #define ROUND(x) ((x > 0 ) ? (long) floor(x+0.5) : (long) ceil(x-0.5))
 
-void 
+void
 FFTLib_op::Initialize(int N, bool optimize)
 {
         Exp = ROUND(log2(N));
@@ -26,7 +26,7 @@ FFTLib_op::Initialize(int N, bool optimize)
 		delete[] A.imagp;
 		vDSP_destroy_fftsetupD(SetupReal);
 	}
-		
+
 	A.realp = new double[ N/2];
 	A.imagp = new double[ N/2];
 	SetupReal = vDSP_create_fftsetupD(Exp, 0);
@@ -44,13 +44,13 @@ FFTLib_op::SetSize(int N, bool optimize, double *in, double *out)
 	Initialize(N, optimize);
 }
 
-void 
+void
 FFTLib_op::ComputeFrame(int N, double *in, double *out)
 {
 	vDSP_ctozD ((DSPDoubleComplex*) in, 2, &A, 1, N/2 );
-	
+
 	vDSP_fft_zripD(SetupReal, &A, 1, Exp, FFT_FORWARD);
-	
+
 	int i,j;
 	for (i=0; i<N/2; i++)
 		out[i] = A.realp[i]*0.5;

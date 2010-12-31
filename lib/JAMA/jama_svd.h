@@ -26,11 +26,11 @@ namespace JAMA
    rank can be computed from this decomposition.
 
    <p>
-	(Adapted from JAMA, a Java Matrix Library, developed by jointly 
+	(Adapted from JAMA, a Java Matrix Library, developed by jointly
 	by the Mathworks and NIST; see  http://math.nist.gov/javanumerics/jama).
    */
 template <class Real>
-class SVD 
+class SVD
 {
 
 
@@ -47,14 +47,14 @@ class SVD
       m = Arg.dim1();
       n = Arg.dim2();
       int nu = min(m,n);
-      s = Array1D<Real>(min(m+1,n)); 
+      s = Array1D<Real>(min(m+1,n));
       U = Array2D<Real>(m, nu, Real(0));
       V = Array2D<Real>(n,n);
       Array1D<Real> e(n);
       Array1D<Real> work(m);
 	  Array2D<Real> A(Arg.copy());
-      int wantu = 1;  					/* boolean */
-      int wantv = 1;  					/* boolean */
+      int wantu = 1;					/* boolean */
+      int wantv = 1;					/* boolean */
 	  int i=0, j=0, k=0;
 
       // Reduce A to bidiagonal form, storing the diagonal elements
@@ -274,7 +274,7 @@ class SVD
                if (ks == k) {
                   break;
                }
-               double t = (ks != p ? abs(e[ks]) : 0.) + 
+               double t = (ks != p ? abs(e[ks]) : 0.) +
                           (ks != k+1 ? abs(e[ks-1]) : 0.);
                if (abs(s[ks]) <= eps*t)  {
                   s[ks] = 0.0;
@@ -349,9 +349,9 @@ class SVD
             case 3: {
 
                // Calculate the shift.
-   
+
                double scale = max(max(max(max(
-                       abs(s[p-1]),abs(s[p-2])),abs(e[p-2])), 
+                       abs(s[p-1]),abs(s[p-2])),abs(e[p-2])),
                        abs(s[k])),abs(e[k]));
                double sp = s[p-1]/scale;
                double spm1 = s[p-2]/scale;
@@ -370,9 +370,9 @@ class SVD
                }
                double f = (sk + sp)*(sk - sp) + shift;
                double g = sk*ek;
-   
+
                // Chase zeros.
-   
+
                for (j = k; j < p-1; j++) {
                   double t = hypot(f,g);
                   double cs = f/t;
@@ -417,7 +417,7 @@ class SVD
             case 4: {
 
                // Make the singular values positive.
-   
+
                if (s[k] <= 0.0) {
                   s[k] = (Real)(s[k] < 0.0 ? -s[k] : 0.0);
                   if (wantv) {
@@ -426,9 +426,9 @@ class SVD
                      }
                   }
                }
-   
+
                // Order the singular values.
-   
+
                while (k < pp) {
                   if (s[k] >= s[k+1]) {
                      break;
@@ -457,28 +457,28 @@ class SVD
    }
 
 
-   void getU (Array2D<Real> &A) 
+   void getU (Array2D<Real> &A)
    {
-   	  int minm = min(m+1,n);
+	  int minm = min(m+1,n);
 
 	  A = Array2D<Real>(m, minm);
 
 	  for (int i=0; i<m; i++)
-	  	for (int j=0; j<minm; j++)
+		for (int j=0; j<minm; j++)
 			A[i][j] = U[i][j];
-   	
+
    }
 
    /* Return the right singular vectors */
 
-   void getV (Array2D<Real> &A) 
+   void getV (Array2D<Real> &A)
    {
-   	  A = V;
+	  A = V;
    }
 
    /** Return the one-dimensional array of singular values */
 
-   void getSingularValues (Array1D<Real> &x) 
+   void getSingularValues (Array1D<Real> &x)
    {
       x = s;
    }
@@ -488,7 +488,7 @@ class SVD
    */
 
    void getS (Array2D<Real> &A) {
-   	  A = Array2D<Real>(n,n);
+	  A = Array2D<Real>(n,n);
       for (int i = 0; i < n; i++) {
          for (int j = 0; j < n; j++) {
             A[i][j] = 0.0;
@@ -513,7 +513,7 @@ class SVD
    @return     Number of nonnegligible singular values.
    */
 
-   int rank () 
+   int rank ()
    {
       double eps = pow(2.0,-52.0);
       double tol = max(m,n)*s[0]*eps;

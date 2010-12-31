@@ -14,7 +14,7 @@
 #ifndef ERR_H_OP
 #define ERR_H_OP 1
 
-#include <string> 
+#include <string>
 using namespace std;
 
 const int  NOFLCODE = -1;

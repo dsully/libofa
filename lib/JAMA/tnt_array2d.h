@@ -33,10 +33,10 @@ namespace TNT
 
 /**
 	Tempplated two-dimensional, numerical array which
-	looks like a conventional C multiarray. 
+	looks like a conventional C multiarray.
 	Storage corresponds to C (row-major) ordering.
-	Elements are accessed via A[i][j] notation. 
-	
+	Elements are accessed via A[i][j] notation.
+
 	<p>
 	Array assignment is by reference (i.e. shallow assignment).
 	That is, B=A implies that the A and B point to the
@@ -61,12 +61,12 @@ namespace TNT
 	to it, it is destoryed.
 */
 template <class T>
-class Array2D 
+class Array2D
 {
 
 
   private:
-    T** v_;                  
+    T** v_;
 	int m_;
     int n_;
     int *ref_count_;
@@ -111,7 +111,7 @@ class Array2D
 	Array2D B(A.copy()), or B = A.copy(), instead.
 */
 template <class T>
-Array2D<T>::Array2D(const Array2D<T> &A) : v_(A.v_), m_(A.m_), 
+Array2D<T>::Array2D(const Array2D<T> &A) : v_(A.v_), m_(A.m_),
 	n_(A.n_), ref_count_(A.ref_count_)
 {
 	(*ref_count_)++;
@@ -162,7 +162,7 @@ Array2D<T>::Array2D(int m, int n, const T &val) : v_(0), m_(m), n_(n) ,
 
 /**
 	Create a new (m x n) array,  as a view of an existing one-dimensional
-	array stored in <b>C order</b>, i.e. right-most dimension varying fastest.  
+	array stored in <b>C order</b>, i.e. right-most dimension varying fastest.
 	(Often referred to as "row-major" ordering.)
 	Note that the storage for this pre-existing array will
 	never be garbage collected by the Array2D class.
@@ -170,7 +170,7 @@ Array2D<T>::Array2D(int m, int n, const T &val) : v_(0), m_(m), n_(n) ,
 	@param m the first (row) dimension of the new matrix.
 	@param n the second (column) dimension of the new matrix.
 	@param a the one dimensional C array to use as data storage for
-		the array. 
+		the array.
 */
 template <class T>
 Array2D<T>::Array2D(int m, int n, T *a) : v_(0), m_(m), n_(n) ,
@@ -192,8 +192,8 @@ Array2D<T>::Array2D(int m, int n, T *a) : v_(0), m_(m), n_(n) ,
 /**
 	Used for A[i][j] indexing.  The first [] operator returns
 	a conventional pointer which can be dereferenced using the
-	same [] notation.  
-	
+	same [] notation.
+
 	If TNT_BOUNDS_CHECK macro is define, the left-most index (row index)
 	is checked that it falls within the array bounds (via the
 	assert() macro.) Note that bounds checking can occur in
@@ -201,14 +201,14 @@ Array2D<T>::Array2D(int m, int n, T *a) : v_(0), m_(m), n_(n) ,
 	this is just a C pointer.
 */
 template <class T>
-inline T* Array2D<T>::operator[](int i) 
-{ 
+inline T* Array2D<T>::operator[](int i)
+{
 #ifdef TNT_BOUNDS_CHECK
 	assert(i >= 0);
 	assert(i < m_);
 #endif
 
-return v_[i]; 
+return v_[i];
 
 }
 
@@ -226,7 +226,7 @@ Array2D<T> & Array2D<T>::operator=(const T &a)
 }
 /**
 	Create a new of existing matrix.  Used in B = A.copy()
-	or in the construction of B, e.g. Array2D B(A.copy()), 
+	or in the construction of B, e.g. Array2D B(A.copy()),
 	to create a new array that does not share data.
 
 */
@@ -247,11 +247,11 @@ Array2D<T> Array2D<T>::copy() const
 
 	This differs from B = A.copy() in that references to B
 	before this assignment are also affected.  That is, if
-	we have 
+	we have
 	<pre>
 	Array2D A(m,n);
 	Array2D C(m,n);
-	Array2D B(C);        // elements of B and C are shared. 
+	Array2D B(C);        // elements of B and C are shared.
 
 </pre>
 	then B.inject(A) affects both and C, while B=A.copy() creates
@@ -259,7 +259,7 @@ Array2D<T> Array2D<T>::copy() const
 
 	@param A the array from elements will be copied
 	@return an instance of the modifed array. That is, in B.inject(A),
-	it returns B.  If A and B are not conformat, no modifications to 
+	it returns B.  If A and B are not conformat, no modifications to
 	B are made.
 
 */
@@ -303,7 +303,7 @@ Array2D<T> & Array2D<T>::ref(const Array2D<T> &A)
 		ref_count_ = A.ref_count_;
 
 		(*ref_count_) ++ ;
-		
+
 	}
 	return *this;
 }
@@ -436,10 +436,10 @@ template <class T>
 T* Array2D<T>::begin_() { return &(v_[0][0]); }
 
 /**
-	Create a null (0x0) array.  
+	Create a null (0x0) array.
 */
 template <class T>
-Array2D<T>::Array2D() : v_(0), m_(0), n_(0) 
+Array2D<T>::Array2D() : v_(0), m_(0), n_(0)
 {
 	ref_count_ = new int;
 	*ref_count_ = 1;

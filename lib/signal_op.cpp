@@ -108,13 +108,13 @@ Signal_op::PrepareMono(long newRate, double silTh)
 
 // Add left and right channels
 
-void Signal_op::LPlusR() 
+void Signal_op::LPlusR()
 {
-	if (NumChannels != 2) 
+	if (NumChannels != 2)
 		return;
 	short* tmpBuf = new short[NumBlocks];
 	short* samples = Data;
-	for (long i=0, n=0; i<NumBlocks*2; i+=2, n++) 
+	for (long i=0, n=0; i<NumBlocks*2; i+=2, n++)
 	{
 		int sum = samples[i] + samples[i+1];
 		tmpBuf[n] = sum / 2;
@@ -130,13 +130,13 @@ void Signal_op::LPlusR()
 
 // Subtract left and right channels.
 
-void Signal_op::LMinusR() 
+void Signal_op::LMinusR()
 {
-	if (NumChannels != 2) 
+	if (NumChannels != 2)
 		return;
 	short * tmpBuf = new short[NumBlocks];
 	short * samples = Data;
-	for (long i=0, n=0; i<NumBlocks*2; i+=2, n++) 
+	for (long i=0, n=0; i<NumBlocks*2; i+=2, n++)
 	{
 		int sum = samples[i] - samples[i+1];
 		tmpBuf[n] = sum / 2;
@@ -150,7 +150,7 @@ void Signal_op::LMinusR()
 }
 
 
-void 
+void
 Signal_op::RemoveSilence(double startTh, double endTh)
 {
 	long i, n;
@@ -165,7 +165,7 @@ Signal_op::RemoveSilence(double startTh, double endTh)
 	long start = 0;
 
 	// Front silence removal
-	while (start < stop) 
+	while (start < stop)
 	{
 		sum += abs(samples[start]);
 		count++;
@@ -188,7 +188,7 @@ Signal_op::RemoveSilence(double startTh, double endTh)
 	// Back silence removal
 	count = 0;
 	sum = 0;
-	while (stop > start) 
+	while (stop > start)
 	{
 		sum += abs(samples[stop-1]);
 		count++;
@@ -207,7 +207,7 @@ Signal_op::RemoveSilence(double startTh, double endTh)
 	    stop--;
 	}
 	if (stop > NumBlocks) stop = NumBlocks;
-	
+
 	if (stop-start <= 0)
 		throw OnePrintError("Signal has silence only", SILENCEONLY);
 
@@ -296,7 +296,7 @@ Signal_op::Normalize()
 	long i;
 	int max = 0;
 	double factor;
-	
+
 	for (i=0; i<NumBlocks; i++)
 	{
 		if (abs(samples[i]) > max)
@@ -322,7 +322,7 @@ Signal_op::Normalize()
 
 
 // Mono signals only
-void 
+void
 Signal_op::ConvertSampleRate(long targetSR)
 {
 	if (NumChannels > 1) return;
@@ -358,7 +358,7 @@ Signal_op::GetCrossCorrelation()
 	double C12 = 0, C11 = 0, C22 = 0;
 	short* samples = Data;
 
-	for (k=0; k<NumBlocks*2; k+=2) 
+	for (k=0; k<NumBlocks*2; k+=2)
 	{
 		C12 += samples[k]*samples[k+1];
 		C11 += samples[k]*samples[k];

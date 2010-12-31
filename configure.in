@@ -30,7 +30,7 @@ AC_PROG_AWK
 AC_PROG_CC
 AC_LIBLTDL_CONVENIENCE
 AM_PROG_LIBTOOL
-AC_SUBST(LIBTOOL_DEPS)  
+AC_SUBST(LIBTOOL_DEPS)
 AC_PROG_CXX
 AC_PROG_INSTALL
 PREFIX="${prefix}"
@@ -117,13 +117,13 @@ dnl Checks for header files.
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_SUBST(CFLAGS)
 AC_OUTPUT([
-Makefile 
-include/Makefile 
-include/ofa1/Makefile 
-lib/Makefile 
-lib/JAMA/Makefile 
-lib/AFLIB/Makefile 
-examples/Makefile 
+Makefile
+include/Makefile
+include/ofa1/Makefile
+lib/Makefile
+lib/JAMA/Makefile
+lib/AFLIB/Makefile
+examples/Makefile
 libofa.pc
-Doxyfile], 
+Doxyfile],
 echo timestamp > stamp-h)

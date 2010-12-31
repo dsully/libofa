@@ -84,30 +84,22 @@ AC_SUBST(EXAMPLES_SUBDIR)
 
 dnl Support libfftw2 and vSDP and MKL (intel)
 dnl  FFTW for FFTW v2. FFTW3 for FFTW v3. VDSP for vDSP. MKL for MKL
+dnl There's a bug in OS X's Accelerate framework. Use FFTW3 instead.
 dnl TODO: PREANSI for win32
 
-if test x$os = xdarwin; then
-    AC_MSG_NOTICE([Using vDSP on OS X])
-    FFT_LIBS="$LIBS -XCClinker -framework -XCClinker Accelerate"
-    FFT_WRAPPER="fftlibvdsp_op.cpp"
-    AM_CONDITIONAL(FFTW3, false)
-    AM_CONDITIONAL(VDSP, true)
-    AC_DEFINE_UNQUOTED(VDSP, 1, Use vDSP)
-else
-    AC_MSG_NOTICE([Using libfftw3])
-    AC_CHECK_LIB(fftw3, fftw_malloc,
-            [
-             FFT_LIBS="-lfftw3"
-             FFT_WRAPPER="fftlibw3_op.cpp"
-             AM_CONDITIONAL(FFTW3, true)
-             AM_CONDITIONAL(VDSP, false)
-             AC_DEFINE_UNQUOTED(FFTW3, 1, Use libfftw3)
-            ], [
-            echo "*"
-            echo "*  libfftw3 is needed to build this library."
-            echo "*"
-            AC_MSG_ERROR("Cannot build. Stop.")])
-fi
+AC_MSG_NOTICE([Using libfftw3])
+AC_CHECK_LIB(fftw3, fftw_malloc,
+    [
+     FFT_LIBS="-lfftw3"
+     FFT_WRAPPER="fftlibw3_op.cpp"
+     AM_CONDITIONAL(FFTW3, true)
+     AM_CONDITIONAL(VDSP, false)
+     AC_DEFINE_UNQUOTED(FFTW3, 1, Use libfftw3)
+    ], [
+    echo "*"
+    echo "*  libfftw3 is needed to build this library."
+    echo "*"
+    AC_MSG_ERROR("Cannot build. Stop.")])
 
 AC_SUBST(FFT_LIBS)
 AC_SUBST(FFT_WRAPPER)

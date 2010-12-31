@@ -9,3 +9,12 @@
 *.a
 autom4te.cache
 config.status*
+Makefile
+.deps
+config.log
+config.h
+examples/example
+Doxyfile
+libofa.pc
+libtool
+stamp-h*

@@ -88,7 +88,7 @@ dnl TODO: PREANSI for win32
 
 if test x$os = xdarwin; then
     AC_MSG_NOTICE([Using vDSP on OS X])
-    FFT_LIBS="$LIBS -framework Accelerate"
+    FFT_LIBS="$LIBS -XCClinker -framework -XCClinker Accelerate"
     FFT_WRAPPER="fftlibvdsp_op.cpp"
     AM_CONDITIONAL(FFTW3, false)
     AM_CONDITIONAL(VDSP, true)
